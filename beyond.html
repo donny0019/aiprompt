@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beyond RTF: Advanced AI Prompt Techniques</title>
+    
+    <meta name="description" content="Master advanced AI prompting techniques including few-shot prompting, chain-of-thought, prompt chaining, and multi-persona role-playing to become an AI power user.">
+    <meta name="author" content="PromptCraft Masters">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Code+Pro:wght@500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #818cf8;
+            --primary-dark: #4f46e5;
+            --secondary: #fbbf24;
+            --accent: #f472b6;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-text: #f1f5f9;
+            --dark-border: #334155;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+        }
+        .code {
+            font-family: 'Source Code Pro', monospace;
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            font-size: 0.9em;
+            color: #a5b4fc;
+            font-weight: 500;
+            border: 1px solid #475569;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: gradientShift 3s ease infinite;
+        }
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #4f46e5, transparent);
+            margin: 2rem 0;
+        }
+        .dark-card {
+            background-color: var(--dark-card);
+            border: 1px solid var(--dark-border);
+        }
+        .technique-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background-color: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(71, 85, 105, 0.5);
+        }
+        .technique-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+        .example-box {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            border-left: 4px solid var(--primary);
+        }
+        .persona-bubble {
+            border-radius: 1rem 1rem 1rem 0;
+            position: relative;
+        }
+        .persona-bubble::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -10px;
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-right-color: var(--persona-color);
+            border-left: 0;
+            border-bottom: 0;
+            margin-left: -5px;
+        }
+        .floating {
+            animation: floating 3s ease-in-out infinite;
+        }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .glow {
+            box-shadow: 0 0 15px rgba(129, 140, 248, 0.3);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 to-slate-800 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto">
+        <header class="text-center mb-16">
+            <div class="flex justify-center mb-8">
+                <div class="w-16 h-16 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 flex items-center justify-center floating glow">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+            </div>
+            <span class="inline-block px-4 py-2 text-sm font-semibold text-indigo-300 bg-indigo-900/50 rounded-full mb-6 glow">
+                Advanced AI Prompt Engineering
+            </span>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-4">
+                Beyond <span class="gradient-text">RTF</span>
+            </h1>
+            <p class="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed">
+                4 Advanced Techniques to Become an AI Power User
+            </p>
+        </header>
+
+        <div class="bg-slate-800/50 rounded-2xl shadow-2xl overflow-hidden mb-16 backdrop-blur-sm border border-slate-700/50">
+            <div class="p-8 md:p-12">
+                <div class="max-w-4xl mx-auto">
+                    <section class="mb-16">
+                        <h2 class="text-3xl font-bold text-white mb-6">Mastering the Next Level of AI Interaction</h2>
+                        <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                            You've mastered the RTF (Role, Task, Format) Framework, and you're already getting better, more reliable results from your AI model. 
+                            You've learned to eliminate guesswork by providing clear context and structure.
+                        </p>
+                        <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                            Now, it's time to move beyond the fundamentals and tackle more complex creative and analytical tasks. The following four techniques 
+                            are the next step in your journey to becoming a true AI power user. They will enable you to solve multi-step problems, generate 
+                            highly specific content, and explore ideas with incredible depth.
+                        </p>
+                    </section>
+
+                    <div class="space-y-20">
+                        <section class="technique-card rounded-2xl p-8">
+                            <div class="flex items-start mb-8">
+                                <div class="bg-gradient-to-br from-purple-600 to-pink-600 text-white w-14 h-14 rounded-xl flex items-center justify-center mr-6 text-2xl font-bold shrink-0">
+                                    1
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Few-Shot Prompting: Guide by Example</h3>
+                                    <p class="text-slate-400">Show the AI exactly what you want with concrete examples.</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold text-white mb-4">What is it?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        Few-shot prompting is the practice of including several examples (the "shots") of what you want the AI to do directly within your prompt. 
+                                        You show the AI the exact input-output pattern you're looking for before giving it the new input to process.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">Why does it work?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        This technique gives the AI a crystal-clear pattern to follow. Instead of just interpreting your instructions, it learns the desired 
+                                        structure and style from your examples. This dramatically improves accuracy for tasks that require a very specific or unconventional format.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">When to use it:</h4>
+                                    <ul class="list-disc list-inside space-y-2 text-slate-300 pl-4">
+                                        <li>Data Classification: Categorizing user feedback, support tickets, or social media comments.</li>
+                                        <li>Sentiment Analysis: Grading a piece of text as positive, negative, or neutral.</li>
+                                        <li>Data Formatting: Converting information from one format to another (e.g., paragraph to JSON).</li>
+                                        <li>Adopting a Niche Style: Generating text that perfectly mimics a unique tone or structure.</li>
+                                    </ul>
+                                </div>
+
+                                <div class="example-box p-6 rounded-xl">
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-purple-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        Example: Sentiment Analysis
+                                    </h4>
+                                    <div class="bg-slate-900/50 p-4 rounded-lg mb-4">
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            You are a sentiment analysis bot. For each piece of user feedback, classify it as "Positive", "Negative", or "Neutral" and provide a brief justification. Follow the examples provided.
+                                        </p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="bg-slate-900/50 p-4 rounded-lg">
+                                            <p class="text-slate-400 text-sm mb-1">Example 1:</p>
+                                            <p class="text-slate-300 font-mono text-sm">Feedback: "The user interface is a bit confusing at first, but I love the new features."</p>
+                                            <p class="text-slate-300 font-mono text-sm">Output: {"sentiment": "Positive", "justification": "The user expresses love for new features, despite some initial confusion."}</p>
+                                        </div>
+                                        <div class="bg-slate-900/50 p-4 rounded-lg">
+                                            <p class="text-slate-400 text-sm mb-1">Example 2:</p>
+                                            <p class="text-slate-300 font-mono text-sm">Feedback: "It took three days for my order to ship."</p>
+                                            <p class="text-slate-300 font-mono text-sm">Output: {"sentiment": "Neutral", "justification": "The user is stating a fact about shipping time without expressing strong emotion."}</p>
+                                        </div>
+                                        <div class="bg-slate-900/50 p-4 rounded-lg">
+                                            <p class="text-slate-400 text-sm mb-1">Example 3:</p>
+                                            <p class="text-slate-300 font-mono text-sm">Feedback: "The app crashes every time I try to upload a photo. This is unusable."</p>
+                                            <p class="text-slate-300 font-mono text-sm">Output: {"sentiment": "Negative", "justification": "The user describes the app as 'unusable' due to critical errors."}</p>
+                                        </div>
+                                        <div class="bg-slate-900/50 p-4 rounded-lg border border-purple-500/50">
+                                            <p class="text-slate-400 text-sm mb-1">Now, classify the following feedback:</p>
+                                            <p class="text-slate-300 font-mono text-sm">Feedback: "I was able to find what I needed, but the search function could be faster."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="technique-card rounded-2xl p-8">
+                            <div class="flex items-start mb-8">
+                                <div class="bg-gradient-to-br from-blue-600 to-cyan-600 text-white w-14 h-14 rounded-xl flex items-center justify-center mr-6 text-2xl font-bold shrink-0">
+                                    2
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Chain-of-Thought (CoT) Prompting</h3>
+                                    <p class="text-slate-400">Teach the AI to "Think" Through Problems Step-by-Step</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold text-white mb-4">What is it?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        Chain-of-thought prompting is a simple but powerful technique where you instruct the AI to break down a problem and 
+                                        "think step-by-step" before providing the final answer. It exposes the AI's reasoning process.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">Why does it work?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        For complex logic or math problems, a direct answer is often wrong because the AI rushes to a conclusion. By forcing it 
+                                        to articulate the intermediate steps, you guide it along a logical path, significantly reducing reasoning errors. It mimics 
+                                        how a person would work through a difficult problem on paper.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">When to use it:</h4>
+                                    <ul class="list-disc list-inside space-y-2 text-slate-300 pl-4">
+                                        <li>Mathematical word problems</li>
+                                        <li>Complex logic puzzles and riddles</li>
+                                        <li>Strategic planning that requires weighing multiple factors</li>
+                                        <li>Any task where the reasoning behind the answer is as important as the answer itself</li>
+                                    </ul>
+                                </div>
+
+                                <div class="example-box p-6 rounded-xl">
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        Example: Logic Problem
+                                    </h4>
+                                    <div class="bg-slate-900/50 p-4 rounded-lg mb-4">
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            There are 5 people in a room: Alice, Bob, Charlie, David, and Eve.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Alice is older than Bob.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Charlie is younger than David.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Bob is older than Eve.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Eve is older than Charlie.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Who is the third oldest?
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Think step-by-step to determine the age order before giving the final answer.
+                                        </p>
+                                    </div>
+                                    <div class="bg-slate-900/50 p-4 rounded-lg border border-blue-500/50">
+                                        <p class="text-slate-400 text-sm mb-2">Expected Output:</p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            1. Alice > Bob (from statement 1)<br>
+                                            2. David > Charlie (from statement 2)<br>
+                                            3. Bob > Eve (from statement 3)<br>
+                                            4. Eve > Charlie (from statement 4)<br>
+                                            5. Combining: Alice > Bob > Eve > Charlie<br>
+                                            6. David must be older than Charlie but relationship to others unknown<br>
+                                            7. Most likely order: Alice > Bob > David > Eve > Charlie<br>
+                                            Final Answer: David is the third oldest.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="technique-card rounded-2xl p-8">
+                            <div class="flex items-start mb-8">
+                                <div class="bg-gradient-to-br from-green-600 to-emerald-600 text-white w-14 h-14 rounded-xl flex items-center justify-center mr-6 text-2xl font-bold shrink-0">
+                                    3
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Multi-Step Prompt Chains</h3>
+                                    <p class="text-slate-400">Build Complex Outputs Incrementally</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold text-white mb-4">What is it?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        A prompt chain is a sequence where the output of one prompt becomes the input for the next. Instead of trying to accomplish 
+                                        a massive task in a single, overloaded prompt, you break it down into a series of smaller, more focused sub-tasks.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">Why does it work?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        LLMs excel at focused tasks. A single prompt that asks an AI to "write a 5,000-word research paper on renewable energy, 
+                                        including a detailed outline, data tables, and a concluding summary" will likely produce a mediocre result. By chaining 
+                                        prompts, you ensure each component is generated with high quality, leading to a far superior final product.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">When to use it:</h4>
+                                    <ul class="list-disc list-inside space-y-2 text-slate-300 pl-4">
+                                        <li>Writing long-form content (reports, essays, articles)</li>
+                                        <li>Developing a comprehensive marketing campaign</li>
+                                        <li>Creating complex code or a full software component</li>
+                                        <li>Any project that can be broken down into a logical sequence of steps</li>
+                                    </ul>
+                                </div>
+
+                                <div class="example-box p-6 rounded-xl">
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        Example: Writing a Blog Post
+                                    </h4>
+                                    <div class="space-y-4">
+                                        <div class="bg-slate-900/50 p-4 rounded-lg">
+                                            <p class="text-slate-400 text-sm mb-1">Prompt 1: Create the Outline</p>
+                                            <p class="text-slate-300 font-mono text-sm">
+                                                "You are an expert SEO strategist. Create a detailed blog post outline for the keyword 'The Ultimate Guide to Indoor Herb Gardening.' Include an introduction, three main body sections with sub-points, and a conclusion."
+                                            </p>
+                                        </div>
+                                        <div class="bg-slate-900/50 p-4 rounded-lg">
+                                            <p class="text-slate-400 text-sm mb-1">Prompt 2: Write the Introduction</p>
+                                            <p class="text-slate-300 font-mono text-sm">
+                                                "Based on the outline provided, write a compelling 150-word introduction that hooks the reader and briefly explains what they will learn in the guide."
+                                            </p>
+                                        </div>
+                                        <div class="bg-slate-900/50 p-4 rounded-lg border border-green-500/50">
+                                            <p class="text-slate-400 text-sm mb-1">Prompt 3: Write the First Section</p>
+                                            <p class="text-slate-300 font-mono text-sm">
+                                                "Now, write the first main body section titled 'Choosing Your Herbs,' covering all the sub-points (Basil, Mint, Cilantro) from the outline. Make it beginner-friendly."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="technique-card rounded-2xl p-8">
+                            <div class="flex items-start mb-8">
+                                <div class="bg-gradient-to-br from-amber-600 to-orange-600 text-white w-14 h-14 rounded-xl flex items-center justify-center mr-6 text-2xl font-bold shrink-0">
+                                    4
+                                </div>
+                                <div>
+                                    <h3 class="text-2xl md:text-3xl font-bold text-white mb-2">Multi-Persona Role-Playing</h3>
+                                    <p class="text-slate-400">Explore Ideas from Every Angle</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div>
+                                    <h4 class="text-xl font-semibold text-white mb-4">What is it?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        This is an advanced application of the "Role" in the RTF framework. It involves instructing the AI to simulate a discussion, 
+                                        debate, or meeting between two or more distinct personas, each with their own goals, viewpoints, and expertise.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">Why does it work?</h4>
+                                    <p class="text-slate-300 mb-6">
+                                        This technique allows you to stress-test ideas, anticipate counterarguments, and generate creative solutions. By forcing the 
+                                        AI to embody conflicting perspectives, you can uncover blind spots in your own thinking and explore the full spectrum of a 
+                                        topic in a dynamic way.
+                                    </p>
+
+                                    <h4 class="text-xl font-semibold text-white mb-4">When to use it:</h4>
+                                    <ul class="list-disc list-inside space-y-2 text-slate-300 pl-4">
+                                        <li>Brainstorming the pros and cons of a major business decision</li>
+                                        <li>Generating realistic dialogue for a script or novel</li>
+                                        <li>Preparing for a negotiation or debate by simulating the other party</li>
+                                        <li>Creating educational content that presents multiple viewpoints</li>
+                                    </ul>
+                                </div>
+
+                                <div class="example-box p-6 rounded-xl">
+                                    <h4 class="text-lg font-semibold text-white mb-4 flex items-center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                        </svg>
+                                        Example: Business Decision Debate
+                                    </h4>
+                                    <div class="bg-slate-900/50 p-4 rounded-lg mb-4">
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            You will facilitate a debate between two personas to help me evaluate a business decision.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Persona 1: "CFO Chris." Chris is pragmatic, risk-averse, and focused entirely on the budget and ROI. He is skeptical of unproven marketing expenses.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Persona 2: "Marketing Maya." Maya is creative, optimistic, and focused on brand growth and market penetration. She believes in investing in new channels to reach customers.
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            The Topic: Should our e-commerce company invest $50,000 in a new TikTok influencer marketing campaign?
+                                        </p>
+                                        <p class="text-slate-300 font-mono text-sm">
+                                            Please generate a 3-round debate between Chris and Maya on this topic. Start with Maya's opening statement.
+                                        </p>
+                                    </div>
+                                    <div class="space-y-4">
+                                        <div class="bg-amber-900/20 p-4 rounded-lg" style="--persona-color: #f59e0b;">
+                                            <p class="text-amber-200 font-medium mb-1">Marketing Maya:</p>
+                                            <p class="text-slate-300">"This is exactly the kind of forward-thinking investment we need to make! TikTok has 1 billion monthly active users, and influencer content gets 3x the engagement of traditional ads. The $50K could get us 5 nano-influencers for 3 months - enough to test the channel properly."</p>
+                                        </div>
+                                        <div class="bg-blue-900/20 p-4 rounded-lg ml-8" style="--persona-color: #3b82f6;">
+                                            <p class="text-blue-200 font-medium mb-1">CFO Chris:</p>
+                                            <p class="text-slate-300">"Those engagement stats sound impressive, but where's the hard data on conversion to actual sales? We've seen similar claims about other social platforms that didn't pan out. $50K is 10% of our Q3 marketing budget - that's a huge risk for an unproven channel."</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-white mb-6">Ready to Master Advanced Prompting?</h2>
+            <p class="text-slate-300 text-lg mb-8 max-w-3xl mx-auto">
+                These four techniques will elevate your AI interactions to professional level. Start practicing with one technique at a time, and soon you'll be combining them for even more powerful results.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="index.html" class="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-8 rounded-xl transition-all transform hover:scale-105 shadow-lg">
+                    Back to RTF Framework
+                </a>
+                <a href="redirect.html" class="bg-transparent border-2 border-indigo-500 text-indigo-400 hover:bg-indigo-900/30 hover:text-white font-bold py-3 px-8 rounded-xl transition-all">
+                    Download Advanced Guide
+                </a>
+            </div>
+        </div>
+
+        <footer class="text-center text-slate-500 text-sm border-t border-slate-800 pt-8">
+            <p>© 2023 AI Prompt Engineering. All techniques developed through extensive testing with GPT-4, Claude 2, and Gemini.</p>
+        </footer>
+    </div>
+</body>
+</html>
